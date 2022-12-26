@@ -1,0 +1,17 @@
+{
+  "name": "selfbotwa",
+  "version": "1.0.0",
+  "description": "Self bot Whatsapp by Panggigo2712",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "botwa",
+    "bot",
+    "whatsapp",
+    "selfbot"
+  ],
+  "author": "Panggigo2712",
+  "license": "ISC"
+}
