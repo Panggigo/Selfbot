@@ -167,7 +167,7 @@ async function StartBot() {
                 break
 
                 case 'source':
-                text = `[ 1 ] Panggigo`
+                text = `https://github.com/Panggigo/Selfbot`
                 reply(text)
                 break
 
