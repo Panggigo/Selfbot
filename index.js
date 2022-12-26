@@ -137,32 +137,28 @@ async function StartBot() {
 
                 case 'menu':
                 ImgBut(from, `./Media/Foto/menu.jpeg`, `┏━━••• *_MENU_* 
-┃》${prefix}image
-┃》${prefix}video
-┃》${prefix}gif
-┃》${prefix}audio
-┃》${prefix}credits 
+┃》${prefix}menu
 ┗━━━━━━━━ ✓`, `★彡[Self-BOT]彡★`,
                 [
                     {
-                        buttonId: `${prefix}credits`, 
+                        buttonId: `${prefix}update`, 
                         buttonText: {
-                            displayText: `𝑪𝑹𝑬𝑫𝑰𝑻`
+                            displayText: `UPDATE`
                         }, 
                         type: 1
                     },
                     {
                         buttonId: `${prefix}source`, 
                         buttonText: {
-                            displayText: `𝑴𝑬𝑵𝑼`
+                            displayText: `SOURCE`
                         }, 
                         type: 1
                     }
                 ], info)
                 break
 
-                case 'credits':
-                text = `[ 1 ] Panggigo`
+                case 'update':
+                text = `Comingsoon`
                 reply(text)
                 break
 
