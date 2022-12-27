@@ -16,7 +16,12 @@ const bot = 'Self-Bot'
 const fs = require('fs')
 const pino = require('pino')
 
-//===========(CONNECTION BOT)==============\\
+//===========Function==============\\
+const { 
+    isUrl, 
+    sleep, 
+    getGroupAdmins 
+} = require('./lib/function')
 const {
     state, 
     saveState 
