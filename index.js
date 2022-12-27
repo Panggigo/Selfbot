@@ -7,11 +7,6 @@ const {
     useSingleFileAuthState 
 } = require ('@adiwajshing/baileys')
 
-//=============CONFIG=============\\
-const prefix = '!'
-const noOwner = '62895632478507'
-const bot = 'Self-Bot'
-
 //=============NODE-MODULE=============\\
 const fs = require('fs')
 const pino = require('pino')
@@ -21,11 +16,19 @@ const {
     isUrl, 
     sleep, 
     getGroupAdmins 
-} = require('./lib/function')
+} = require('./Lib/function')
 const {
     state, 
     saveState 
-} = useSingleFileAuthState('connection.json')
+} = useSingleFileAuthState('Connection.json')
+
+//===========Database==============\\
+const setting = JSON.parse(fs.readFileSync('./Database/settings.json'));
+
+prefix = setting.prefix
+public = setting.public
+noOwner = setting.noOwner
+bot = setting.bot
 
 //===================≠≠===================\\
 async function StartBot() {
@@ -61,14 +64,12 @@ async function StartBot() {
         var type = baileys.getContentType(info.message);
         if (info.key && info.key.remoteJid == 'status@broadcast') return
         const fromMe = info.key.fromMe
+        const itsMe = info.key.fromMe ? true : false
         const content = JSON.stringify(info.message)
         const quoted = info.quoted ? info.quoted : info
         const mime = (quoted.msg || quoted).mimetype || ''
         const isMedia = /image|video|sticker|audio/.test(mime)
         const from = info.key.remoteJid
-
-//==============(Public)================\\
-        client.public = true
 
 //==============(BODY)================\\
         var body = (type === 'conversation') ? info.message.conversation : (type == 'imageMessage') ? info.message.imageMessage.caption : (type == 'videoMessage') ? info.message.videoMessage.caption : (type == 'extendedTextMessage') ? info.message.extendedTextMessage.text : (type == 'buttonsResponseMessage') ? info.message.buttonsResponseMessage.selectedButtonId : (type == 'listResponseMessage') ? info.message.listResponseMessage.singleSelectReply.selectedRowId : (type == 'templateButtonReplyMessage') ? info.message.templateButtonReplyMessage.selectedId : (type === 'messageContextInfo') ? (info.message.buttonsResponseMessage?.selectedButtonId || info.message.listResponseMessage?.singleSelectReply.selectedRowId || info.text) : ''
@@ -139,6 +140,14 @@ async function StartBot() {
         }
         try {
             switch(command) {
+                case 'setprefix':
+				if (!itsMe) return reply('')
+				if (!args) return reply(`use ${prefix}setprefix prefix`)
+				prefix = args
+				setting.prefix = prefix
+				fs.writeFileSync('./Database/settings.json', JSON.stringify(setting, null, '\t'))
+                reply(`Prefix successfully changed to ${prefix}`)
+                break
 
                 case 'menu':
                 ImgBut(from, `./Media/Foto/menu.jpeg`, `┏━━••• *_MENU_* 
